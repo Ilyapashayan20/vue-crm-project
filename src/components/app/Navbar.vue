@@ -54,8 +54,8 @@ export default {
      getFormat () {
       return this.format(this.date, 'yyyy MMM dd ')
     } ,
-    logout(){
-       console.log('logout');
+   async logout(){
+       await this.$store.dispatch('logout')
        this.$router.push('/login?message=logout')
     }
   },

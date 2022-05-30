@@ -1,11 +1,12 @@
 <template>
-  <form class="card auth-card">
+  <form @submit.prevent="submitHandler()" class="card auth-card">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
         <input
             id="email"
             type="text"
+            v-model.trim="email"
         >
         <label for="email">Email</label>
         <small class="helper-text invalid">Email</small>
@@ -15,6 +16,7 @@
             id="password"
             type="password"
             class="validate"
+             v-model.trim="password"
         >
         <label for="password">Пароль</label>
         <small class="helper-text invalid">Password</small>
@@ -24,14 +26,15 @@
             id="name"
             type="text"
             class="validate"
+             v-model.trim="name"
         >
         <label for="name">Имя</label>
         <small class="helper-text invalid">Name</small>
       </div>
       <p>
         <label>
-          <input type="checkbox" />
-          <span>С правилами согласен</span>
+          <input @click="checkbox = !checkbox" type="checkbox"  />
+          <span  id="ckb">С правилами согласен</span>
         </label>
       </p>
     </div>
@@ -53,3 +56,44 @@
     </div>
   </form>
 </template>
+
+<script>
+export default {
+  data(){
+    return{
+      email: '',
+      password: '',
+      name : '',
+      checkbox: false
+    }
+  },
+  methods: {
+    
+    async submitHandler(){
+      const formData ={
+        email: this.email,
+        password:this.password,
+        name: this.name
+      }
+    if(this.checkbox){
+       try{
+       await this.$store.dispatch('register', formData)
+       this.$router.push('/')
+    }catch (e){}    
+    } else{
+      document.getElementById('ckb').classList.add('ckb-active')
+      
+    }
+  }
+  }
+}
+</script>
+
+<style scoped>
+.ckb-active{
+  color: red;
+  font-size: 16px;
+}
+
+
+</style>
