@@ -5,7 +5,7 @@
           <a href="#"   @click.prevent="$emit('clk')">
             <i  class="material-icons black-text">dehaze</i>
           </a>
-          <span class="black-text">{{date}}</span>
+          <span class="black-text">{{ getFormat()  }}</span>
         </div>
 
         <ul class="right hide-on-small-and-down">
@@ -40,15 +40,20 @@
 </template>
 
 <script>
+import {format} from 'date-fns'
 export default {
   data(){
     return{
         date:new Date(),
         interval:null,
-        dropdown: null
+        dropdown: null,
+        format
     }
   },
   methods:{
+     getFormat () {
+      return this.format(this.date, 'yyyy MMM dd ')
+    } ,
     logout(){
        console.log('logout');
        this.$router.push('/login?message=logout')
