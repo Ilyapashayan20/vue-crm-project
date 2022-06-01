@@ -1,7 +1,7 @@
 <template>
   <ul :class="{open: value}" class="sidenav open app-sidenav"   > 
       <li v-for="link in  links" :key='link'>
-        <router-link active-class="active" :to="link.url" exact class="waves-effect waves-orange pointer">{{ link.title }}</router-link>
+        <router-link active-class="activee" :to="link.url" exact class="waves-effect waves-orange pointer">{{ link.title }}</router-link>
       </li>
    
     </ul>
@@ -27,7 +27,7 @@ export default {
 
 <style >
 
-.active{
+.activee{
   background-color: rgba(128, 128, 128, 0.266);
 }
 

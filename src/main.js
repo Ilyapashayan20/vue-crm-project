@@ -7,11 +7,13 @@ import  Vuelidate from 'vuelidate'
 import dateFilter from '@/filters/date.filter'
 import 'materialize-css'
 import 'materialize-css/dist/js/materialize.min'
-
+import Loader from '@/components/app/Loader'
 
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/database'
+
+
  
 
 firebase.initializeApp({
@@ -26,6 +28,6 @@ firebase.initializeApp({
 let app 
 firebase.auth().onAuthStateChanged(()=>{
   if(!app){
-    app = createApp(App).use(store).use(router).use(Vuelidate).mount('#app')
+    app = createApp(App).use(store).use(router).use(Vuelidate).component('Loader',Loader).mount('#app')
   }
 })
